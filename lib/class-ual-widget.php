@@ -24,6 +24,15 @@ class UAL_Widget extends WP_Widget {
 	// Include Ajax library on frontend, uncomment if not needed
 	add_action( 'wp_head', array( $this, 'add_ajax_library' ) );
 	
+	// Enqueue JS file
+	wp_enqueue_script( 'ual-widget-js', UAL_URL.'inc/js/widget.js', array('jquery') );
+	
+	// Enqueue CSS file
+	wp_enqueue_style( 'ual-widget-css', UAL_URL.'inc/css/widget.css', array('jquery') );
+	
+	// Add ajax action on the frontend for logged in and non-logged in users
+	add_action( 'wp_ajax_ual_ajax_login', array($this,'login_user') );
+	add_action( 'wp_ajax_nopriv_ual_ajax_login', array($this,'login_user') );
     }
     
     /**
@@ -39,6 +48,39 @@ class UAL_Widget extends WP_Widget {
 
     }
     
+    /*
+     * Logs in the user to wordpress
+     */
+    public function login_user(){
+	
+	// Get AJAX-submitted form data
+	$form_data = array();
+	parse_str($_POST['data'], $form_data);
+	
+	// Extract user credentials
+	$credentials = array('user_login' => $form_data['ual_username'],
+				'user_password' => $form_data['ual_password'],
+				'remember'	=> $form_data['ual_remember_me']    );
+	
+	// Signon user
+	$user = wp_signon($credentials);
+	
+	// User not signed in properly
+	if (is_wp_error($user)){
+	    $response['error'] = $user->get_error_message();
+	    $response['logged_in'] = false;
+	}
+	
+	// User successfully logged in
+	else {
+	    $response['logged_in'] = true;
+	}
+	
+	// Encode and send data
+	echo json_encode($response);
+	
+	die(); // Required for all AJAX calls
+    }
 
     /**
      * Outputs the content of the widget
