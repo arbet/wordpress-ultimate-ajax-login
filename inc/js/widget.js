@@ -45,7 +45,11 @@ jQuery(document).ready(function($) {
                
                // Invalid login, display error message
                else {
+                   // Show error on regular form
                    $("[id^='ual_error_']", form).html(result.error);
+                   
+                   // Show error on dialog boxes
+                   $("[id^='ual_dialog_]").dialog().find("[id^='ual_error_']").html(result.error);
                }
 
                

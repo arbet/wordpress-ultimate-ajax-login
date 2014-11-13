@@ -36,7 +36,33 @@ $ual = new UAL_Template();
 
 ?>
 
-<?php $ual->form_header(); ?>
+<!-- Load jquery UI theme change to suit your needs-->
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
+<script type="text/javascript">
+    
+    jQuery(document).ready(function() {
+	
+	// Open dialog on link click
+	jQuery("[id^='ual_link_']").click(function() {
+
+	    jQuery("[id^='ual_dialog_']").dialog('open');
+	});
+
+	// Initialize dialog object
+	jQuery("[id^='ual_dialog_'").dialog({
+	    autoOpen: false,
+	});
+	
+    });
+    
+</script>
+
+<!-- Login button code -->
+<button id="ual_link_<?php $ual->form_id(); ?>"><?php _e('Login Here'); ?></button>
+
+<!-- Form Dialog Box -->
+<div id="ual_dialog_<?php $ual->form_id(); ?>" title="<?php _e('Login Area'); ?>">
+    <?php $ual->form_header(); ?>
     <div class='ual_form_item'>
 	<label for='ual_username_<?php $ual->form_id(); ?>'><?php echo _e('Username'); ?></label>
 	<input type="text" id='ual_username_<?php $ual->form_id(); ?>' name='ual_username' class='ual_field ual_username'/>
@@ -54,3 +80,4 @@ $ual = new UAL_Template();
 	<input type='submit' value='<?php echo _e('Login'); ?>' class='ual_field ual_button'/>
     </div>
 </form>
+</div>

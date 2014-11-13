@@ -25,10 +25,10 @@ class UAL_Widget extends WP_Widget {
 	add_action( 'wp_head', array( $this, 'add_ajax_library' ) );
 	
 	// Enqueue JS file
-	wp_enqueue_script( 'ual-widget-js', UAL_URL.'inc/js/widget.js', array('jquery') );
+	wp_enqueue_script( 'ual-widget-js', UAL_URL.'inc/js/widget.js', array('jquery', 'jquery-ui-dialog') );
 	
 	// Enqueue CSS file
-	wp_enqueue_style( 'ual-widget-css', UAL_URL.'inc/css/widget.css', array('jquery') );
+	wp_enqueue_style( 'ual-widget-css', UAL_URL.'inc/css/widget.css');
 	
 	// Add ajax action on the frontend for logged in and non-logged in users
 	add_action( 'wp_ajax_ual_ajax_login', array($this,'login_user') );
