@@ -1,4 +1,17 @@
 <?php
+/*
+ * Name: Dialog Box Form
+ * Description: Displays a login link, when clicked it shows a dialog box
+ * Type: Login
+ * 
+ * Instructions for modifying this template
+ * 
+ * DO NOT MODIFY THE ABOVE HEADERS, OR IT WILL STOP WORKING
+ * Create a folder inside your active theme directory named ultimate_ajax_login and paste this inside it
+ * 
+ * 
+ * Feel free to move things around as you wish, but keep the IDs for the fields as they are
+ */
 
 /* 
  * Copyright (C) 2014 Samer Bechara <sam@thoughtengineer.com>
@@ -18,12 +31,6 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-/*
- * Instructions for modifying this template
- * Create a folder inside your active theme directory named ultimate_ajax_login and paste this inside it
- * 
- * Feel free to move things around as you wish, but keep the IDs for the fields as they are
- */
 // Create new template object
 $ual = new UAL_Template();
 

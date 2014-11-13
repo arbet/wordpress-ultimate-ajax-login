@@ -18,4 +18,8 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
+/*
+ * Displayed for logged in users
+ */
+
 echo "<span class='ual_logged_in'>You are already logged in</span>";

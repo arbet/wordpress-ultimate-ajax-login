@@ -93,12 +93,13 @@ class UAL_Widget extends WP_Widget {
 	// Show template based on user status
 	if( ! is_user_logged_in() ){
 
-	    $this->load_template('widget-logged-out.php');
+	    $this->load_template('widget-'.$instance['template'].'.php');
 	}
 	
 	
 	else {
 
+	    // Load template specified by user
 	    $this->load_template('widget-logged-in.php');
 
 	}
@@ -112,24 +113,27 @@ class UAL_Widget extends WP_Widget {
      */
     public function form( $instance ) {
 
-	/*// If widget_option_field is set, use it
-	if ( isset( $instance[ 'widget_option_field' ] ) ) {
-	    $widget_option_field = $instance[ 'widget_option_field' ];
+	// If template field is set, use it
+	if ( isset( $instance[ 'template' ] ) ) {
+	    $template = $instance[ 'template' ];
 	}
-	// Use default widget_option_field
+	// Use classic template
 	else {
-	    $widget_option_field = 'Posts Per Page';
+	    $template = 'classic';
 	}
    
 	?>
 	<p>
 	    <!-- Widget Option Title Field -->
-	    <label for="<?php echo $this->get_field_id( 'widget_option_field' ); ?>"><?php _e( 'Option Title' ); ?></label> 
-	    <input class="widefat" id="<?php echo $this->get_field_id( 'widget_option_field' ); ?>" name="<?php echo $this->get_field_name( 'widget_option_field' ); ?>" type="text" value="<?php echo esc_attr( $widget_option_field ); ?>">
+	    <label for="<?php echo $this->get_field_id( 'template' ); ?>"><?php _e( 'Form Template' ); ?></label> 
+	    <select class="widefat" id="<?php echo $this->get_field_id( 'template' ); ?>" name="<?php echo $this->get_field_name( 'template' ); ?>">
+		<option value="classic" <?php echo ($template === 'classic')?"selected='selected'":""; ?>>Classic</option>
+		<option value="dialog" <?php echo ($template === 'dialog')?"selected='selected'":""; ?>>Dialog Box</option>
+	    </select>
 	</p>
 
 	<?php 
-	*/
+	
     }
 
     /**
@@ -143,8 +147,8 @@ class UAL_Widget extends WP_Widget {
 	// Initialize instance
 	$instance = array();
 	
-	// Set widget widget_option_field based on user entered option
-	$instance['widget_option_field'] = ( ! empty( $new_instance['widget_option_field'] ) ) ? strip_tags( $new_instance['widget_option_field'] ) : '';	    
+	// Save user template
+	$instance['template'] = ( ! empty( $new_instance['template'] ) ) ? strip_tags( $new_instance['template'] ) : '';	    
 
 	// Return values to be saved
 	return $instance;	    
@@ -153,7 +157,7 @@ class UAL_Widget extends WP_Widget {
     /*
      * Loads template from the theme directory ultimate_ajax_login if it exists
      * Reverts to template folder in plugin if nothing found
-     * @param string $name  The full template name, e.g. widget-logged-in.php
+     * @param string $name  The full template name, e.g. widget-classic.php
      */
     
     public function load_template($template_name){
