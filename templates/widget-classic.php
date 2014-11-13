@@ -34,8 +34,12 @@
 // Create new template object
 $ual = new UAL_Template();
 
+// Object for forgot password form
+$ual_forgot = new UAL_Template();
+
 ?>
 
+<!-- Login Form -->
 <?php $ual->form_header(); ?>
     <div class='ual_form_item'>
 	<label for='ual_username_<?php $ual->form_id(); ?>'><?php echo _e('Username'); ?></label>
@@ -53,4 +57,20 @@ $ual = new UAL_Template();
     <div class='ual_item'>
 	<input type='submit' value='<?php echo _e('Login'); ?>' class='ual_field ual_button'/>
     </div>
+</form> <!-- End of Login Form -->
+
+
+
+<!-- Forgot Password Form -->
+
+<form id="ual_form_forgot_<?php echo $ual_forgot->form_id();?>" method="POST">
+    
+    <label for='ual_username_<?php $ual_forgot->form_id(); ?>'><?php _e('Enter your email address or username');?></label>        
+   
+    <input type='text' name='ual_username' id='ual_username_<?php $ual_forgot->form_id(); ?>' value='' />
+    <?php do_action('lostpassword_form'); ?>
+    
+    <input type="submit" value="<?php _e("Get New Password"); ?>" />
+    <a href="#" class='ual_form_forgot_cancel'><?php _e("Cancel"); ?></a>    
 </form>
+           

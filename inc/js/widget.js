@@ -50,10 +50,28 @@ jQuery(document).ready(function($) {
                    
                    // Show error on dialog boxes
                    $("[id^='ual_dialog_]").dialog().find("[id^='ual_error_']").html(result.error);
+                   
+                   // Log error to console
+                   console.log(result.error);
+                   
+                  // Show forgot password form on click
+                    jQuery("[id^='ual_error_'] a").on("click", function( event) {
+                        
+                        event.preventDefault();
+                        
+                        $(this).find("[id^='ual_form_forgot_']").show('slow'); 
+                    });
                }
 
                
-           });
+           });          
         
     }); 
+    
+    // Cancel button in form is clicked
+    $('.ual_form_forgot_cancel').on("click", function() {
+       
+        event.preventDefault();
+        $(this).parents("[id^='ual_form_forgot_']").hide('slow');        
+    });
 });
