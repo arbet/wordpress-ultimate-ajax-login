@@ -20,10 +20,13 @@
 jQuery(document).ready(function($) {
     
     // Detect form submission
-    $('.ual_form').submit(function ( event ) {
+    $("[id^='ual_form_']").submit(function ( event ) {
        
         // Prevent form from being submitted
         event.preventDefault();
+        
+        // Assign form to variable for later use
+        var form = this;
         
         // Send POST request via AJAX
         jQuery.post(ajaxurl, {
@@ -42,7 +45,7 @@ jQuery(document).ready(function($) {
                
                // Invalid login, display error message
                else {
-                   $('.ual_error').html(result.error);
+                   $("[id^='ual_error_']", form).html(result.error);
                }
 
                

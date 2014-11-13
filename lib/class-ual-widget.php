@@ -88,10 +88,20 @@ class UAL_Widget extends WP_Widget {
      * @param array $args
      * @param array $instance
      */
-    public function widget( $args, $instance ) {		     	        	    
+    public function widget( $args, $instance ) {		     	        	 
 	
-	/* Widget logic and output goes here */
-	require (UAL_PATH.'/inc/views/widget-output.php');
+	// Show template based on user status
+	if( ! is_user_logged_in() ){
+
+	    $this->load_template('widget-logged-out.php');
+	}
+	
+	
+	else {
+
+	    $this->load_template('widget-logged-in.php');
+
+	}
 
     }
 
@@ -138,6 +148,40 @@ class UAL_Widget extends WP_Widget {
 
 	// Return values to be saved
 	return $instance;	    
+    }
+    
+    /*
+     * Loads template from the theme directory ultimate_ajax_login if it exists
+     * Reverts to template folder in plugin if nothing found
+     * @param string $name  The full template name, e.g. widget-logged-in.php
+     */
+    
+    public function load_template($template_name){
+	
+	// Set template path to current theme folder
+	$template_path = 'ultimate_ajax_login';
+	
+	// Set default path
+	$default_path = UAL_PATH.'/templates/';
+	
+	// Find template in theme folder
+	$template = locate_template(
+		array(
+			trailingslashit( $template_path ) . $template_name,
+			$template_name
+		)
+	);
+	
+	// Template not found
+	if (! $template ) {
+	    $template = $default_path.$template_name;
+	}
+	
+	// Require template parser
+	require_once(UAL_PATH.'/lib/class-ual-template.php');
+	
+	// Load template
+	require_once($template);
     }
     
 }
