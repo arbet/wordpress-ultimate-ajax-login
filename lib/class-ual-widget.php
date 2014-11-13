@@ -90,10 +90,12 @@ class UAL_Widget extends WP_Widget {
      */
     public function widget( $args, $instance ) {		     	        	 
 	
+	$template = isset($instance['template'])?$instance['template']:'classic';
+	
 	// Show template based on user status
 	if( ! is_user_logged_in() ){
 
-	    $this->load_template('widget-'.$instance['template'].'.php');
+	    $this->load_template('widget-'.$template.'.php');
 	}
 	
 	
