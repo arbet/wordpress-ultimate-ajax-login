@@ -33,22 +33,6 @@ class UAL_Template {
 	$this->form_id = uniqid();
     }
     
-    // Outputs the form header
-    public function form_header(){
-	
-	echo "<form id='ual_form_".$this->form_id."' class='ual_form' method='post'>";
-	
-    }
-    
-    public function error_div(){
-	echo "<div class='ual_item ual_error error' id='ual_error_$this->form_id'></div>";
-	
-    }
-    
-    // Returns the form's user field
-    public function user_field(){
-	echo 'ual_username_'.$this->form_id;
-    }
     
     public function form_id(){
 	echo $this->form_id;

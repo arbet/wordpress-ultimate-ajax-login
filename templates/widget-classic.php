@@ -10,7 +10,7 @@
  * Create a folder inside your active theme directory named ultimate_ajax_login and paste this inside it
  * 
  * 
- * Feel free to move things around as you wish, but keep the IDs for the fields as they are
+ * Feel free to move things around as you wish, but keep the IDs and names for the fields as they are
  */
 
 /* 
@@ -34,13 +34,10 @@
 // Create new template object
 $ual = new UAL_Template();
 
-// Object for forgot password form
-$ual_forgot = new UAL_Template();
-
 ?>
 
 <!-- Login Form -->
-<?php $ual->form_header(); ?>
+<form id='ual_form_<?php $ual->form_id(); ?>' class='ual_form' method='post'>
     <div class='ual_form_item'>
 	<label for='ual_username_<?php $ual->form_id(); ?>'><?php echo _e('Username'); ?></label>
 	<input type="text" id='ual_username_<?php $ual->form_id(); ?>' name='ual_username' class='ual_field ual_username'/>
@@ -57,17 +54,18 @@ $ual_forgot = new UAL_Template();
     <div class='ual_item'>
 	<input type='submit' value='<?php echo _e('Login'); ?>' class='ual_field ual_button'/>
     </div>
+    <input type="hidden" name='form_id' value="<?php $ual->form_id(); ?>" />
 </form> <!-- End of Login Form -->
 
 
 
 <!-- Forgot Password Form -->
 
-<form id="ual_form_forgot_<?php echo $ual_forgot->form_id();?>" method="POST">
+<form id="ual_form_forgot_<?php echo $ual->form_id();?>" method="POST" style="display:none">
     
-    <label for='ual_username_<?php $ual_forgot->form_id(); ?>'><?php _e('Enter your email address or username');?></label>        
+    <label for='ual_fg_username_<?php $ual->form_id(); ?>'><?php _e('Enter your email address or username');?></label>        
    
-    <input type='text' name='ual_username' id='ual_username_<?php $ual_forgot->form_id(); ?>' value='' />
+    <input type='text' name='ual_username' id='ual_fg_username_<?php $ual->form_id(); ?>' value='' />
     <?php do_action('lostpassword_form'); ?>
     
     <input type="submit" value="<?php _e("Get New Password"); ?>" />

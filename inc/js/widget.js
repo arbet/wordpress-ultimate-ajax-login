@@ -20,13 +20,13 @@
 jQuery(document).ready(function($) {
     
     // Detect form submission
-    $("[id^='ual_form_']").submit(function ( event ) {
+    $("[id^='ual_form_']").on("submit",function ( event ) {                
        
         // Prevent form from being submitted
         event.preventDefault();
         
-        // Assign form to variable for later use
-        var form = this;
+        // Get form ID
+        var form_id = $("[name='form_id']", this).val();                
         
         // Send POST request via AJAX
         jQuery.post(ajaxurl, {
@@ -35,6 +35,7 @@ jQuery(document).ready(function($) {
             data:       $(this).serialize()
            }, function (response) {
 
+                console.log(response);
                // Parse JSON response
                result = $.parseJSON(response);
 
@@ -46,21 +47,26 @@ jQuery(document).ready(function($) {
                // Invalid login, display error message
                else {
                    // Show error on regular form
-                   $("[id^='ual_error_']", form).html(result.error);
+                   $("#ual_error_" + form_id).html(result.error);     
                    
                    // Show error on dialog boxes
-                   $("[id^='ual_dialog_']").dialog().find("[id^='ual_error_']").html(result.error);
-                   
-                   // Log error to console
-                   console.log(result.error);
+                   $("#ual_error_"+form_id).html(result.error);                   
                    
                   // Show forgot password form on click
-                    jQuery("[id^='ual_error_'] a").on("click", function( event) {
+                    jQuery("#ual_error_" + form_id + " a").on("click", function( event) {
                         
                         event.preventDefault();
                         
-                        $(this).find("[id^='ual_form_forgot_']").show('slow'); 
+                        $("#ual_form_forgot_" + form_id).show('slow'); 
+                        
+                        return false;
                     });
+                    
+                    // Cancel button in form is clicked
+                    $('#ual_form_forgot_' + form_id + ' .ual_form_forgot_cancel').on("click", function(event) {
+                        $(this).parents("[id^='ual_form_forgot_']").hide('slow');   
+                        return false;
+                    });                    
                }
 
                
@@ -68,10 +74,4 @@ jQuery(document).ready(function($) {
         
     }); 
     
-    // Cancel button in form is clicked
-    $('.ual_form_forgot_cancel').on("click", function() {
-       
-        event.preventDefault();
-        $(this).parents("[id^='ual_form_forgot_']").hide('slow');        
-    });
 });

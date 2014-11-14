@@ -57,10 +57,13 @@ class UAL_Widget extends WP_Widget {
 	$form_data = array();
 	parse_str($_POST['data'], $form_data);
 	
+	// Should we remember the user data
+	$remember = isset($form_data['ual_remember_me'])?true:false;
+	
 	// Extract user credentials
 	$credentials = array('user_login' => $form_data['ual_username'],
 				'user_password' => $form_data['ual_password'],
-				'remember'	=> $form_data['ual_remember_me']    );
+				'remember'	=> $remember    );
 	
 	// Signon user
 	$user = wp_signon($credentials);

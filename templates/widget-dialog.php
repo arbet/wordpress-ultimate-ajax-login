@@ -43,14 +43,14 @@ $ual = new UAL_Template();
     jQuery(document).ready(function($) {
 	
 	// Initialize dialog object
-	jQuery("[id^='ual_dialog_']").dialog({
+	jQuery("#ual_dialog_<?php $ual->form_id(); ?>").dialog({
 	    autoOpen: false,
 	});
 	
 	// Open dialog on link click
-	jQuery("[id^='ual_link_']").click(function() {
+	jQuery("#ual_link_<?php $ual->form_id(); ?>").click(function() {
 
-	    jQuery("[id^='ual_dialog_']").dialog('open');
+	    jQuery("#ual_dialog_<?php $ual->form_id(); ?>").dialog('open');
 	});
 	
     });
@@ -60,9 +60,11 @@ $ual = new UAL_Template();
 <!-- Login button code -->
 <button id="ual_link_<?php $ual->form_id(); ?>"><?php _e('Login Here'); ?></button>
 
-<!-- Form Dialog Box -->
+<!-- Forms Dialog Box -->
 <div id="ual_dialog_<?php $ual->form_id(); ?>" title="<?php _e('Login Area'); ?>">
-    <?php $ual->form_header(); ?>
+    
+    <!-- Login form -->
+    <form id='ual_form_<?php $ual->form_id(); ?>' class='ual_form' method='post'>
     <div class='ual_form_item'>
 	<label for='ual_username_<?php $ual->form_id(); ?>'><?php echo _e('Username'); ?></label>
 	<input type="text" id='ual_username_<?php $ual->form_id(); ?>' name='ual_username' class='ual_field ual_username'/>
@@ -77,7 +79,24 @@ $ual = new UAL_Template();
     </div>
     <div class='ual_item ual_error error' id='ual_error_<?php $ual->form_id(); ?>'></div>
     <div class='ual_item'>
+	<input type="hidden" name='form_id' value="<?php $ual->form_id(); ?>" />
 	<input type='submit' value='<?php echo _e('Login'); ?>' class='ual_field ual_button'/>
     </div>
 </form>
+
+
+<!-- Forgot Password Form -->
+
+<form id="ual_form_forgot_<?php echo $ual->form_id();?>" method="POST" style="display:none">
+    
+    <label for='ual_fg_username_<?php $ual->form_id(); ?>'><?php _e('Enter your email address or username');?></label>        
+   
+    <input type='text' name='ual_username' id='ual_fg_username_<?php $ual->form_id(); ?>' value='' />
+    <?php do_action('lostpassword_form'); ?>
+    
+    <input type="submit" value="<?php _e("Get New Password"); ?>" />
+    <a href="#" class='ual_form_forgot_cancel'><?php _e("Cancel"); ?></a>    
+</form>
+
+<!-- End of jQuery Dialog Box -->
 </div>
