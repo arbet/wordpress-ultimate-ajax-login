@@ -65,9 +65,11 @@ $ual = new UAL_Template();
     
     <label for='ual_fg_username_<?php $ual->form_id(); ?>'><?php _e('Enter your email address or username');?></label>        
    
-    <input type='text' name='ual_username' id='ual_fg_username_<?php $ual->form_id(); ?>' value='' />
+    <input type='text' name='user_login' id='ual_fg_username_<?php $ual->form_id(); ?>' value='' />
     <?php do_action('lostpassword_form'); ?>
     
+    <div class='ual_item ual_error error' id='ual_forgot_error_<?php $ual->form_id(); ?>'></div>
+    <input type="hidden" name='form_id' value="<?php $ual->form_id(); ?>" />
     <input type="submit" value="<?php _e("Get New Password"); ?>" />
     <a href="#" class='ual_forgot_form_cancel'><?php _e("Cancel"); ?></a>    
 </form>

@@ -90,12 +90,173 @@ class UAL_Widget extends WP_Widget {
      * Reset password AJAX functionality
      */
     
-    public function forgot_password(){
+    public function forgot_password(){	
 	
-	echo 'forgotten password';
+	$result = $this->retrieve_password();
+	
+	// Password has been successfully sent
+	if($result === true){
+	    _e('Password has been successfully sent');
+	}
+	
+	// Error occurred
+	elseif(is_wp_error($result)){
+	    echo $result->get_error_message();
+	}
+	
+	// Should never happen, but just in case
+	else{
+	    _e('An unexpected error occured. Please try again later');
+	}
 	
 	die();
     }
+    
+    /**
+     * Handles sending password retrieval email to user. Copied from wp-login.php because including was throwing an error
+     *
+     * @uses $wpdb WordPress Database object
+     *
+     * @return bool|WP_Error True: when finish. WP_Error on error
+     */
+    function retrieve_password() {
+	
+	
+	    // Parse post data
+	    parse_str($_POST['data'], $form_data);
+	    
+	    global $wpdb, $wp_hasher;
+
+	    $errors = new WP_Error();
+
+	    if ( empty( $form_data['user_login'] ) ) {
+		    $errors->add('empty_username', __('<strong>ERROR</strong>: Enter a username or e-mail address.'));
+	    } else if ( strpos( $form_data['user_login'], '@' ) ) {
+		    $user_data = get_user_by( 'email', trim( $form_data['user_login'] ) );
+		    if ( empty( $user_data ) )
+			    $errors->add('invalid_email', __('<strong>ERROR</strong>: There is no user registered with that email address.'));
+	    } else {
+		    $login = trim($form_data['user_login']);
+		    $user_data = get_user_by('login', $login);
+	    }
+
+	    /**
+	     * Fires before errors are returned from a password reset request.
+	     *
+	     * @since 2.1.0
+	     */
+	    do_action( 'lostpassword_post' );
+
+	    if ( $errors->get_error_code() )
+		    return $errors;
+
+	    if ( !$user_data ) {
+		    $errors->add('invalidcombo', __('<strong>ERROR</strong>: Invalid username or e-mail.'));
+		    return $errors;
+	    }
+
+	    // Redefining user_login ensures we return the right case in the email.
+	    $user_login = $user_data->user_login;
+	    $user_email = $user_data->user_email;
+
+	    /**
+	     * Fires before a new password is retrieved.
+	     *
+	     * @since 1.5.0
+	     * @deprecated 1.5.1 Misspelled. Use 'retrieve_password' hook instead.
+	     *
+	     * @param string $user_login The user login name.
+	     */
+	    do_action( 'retreive_password', $user_login );
+
+	    /**
+	     * Fires before a new password is retrieved.
+	     *
+	     * @since 1.5.1
+	     *
+	     * @param string $user_login The user login name.
+	     */
+	    do_action( 'retrieve_password', $user_login );
+
+	    /**
+	     * Filter whether to allow a password to be reset.
+	     *
+	     * @since 2.7.0
+	     *
+	     * @param bool true           Whether to allow the password to be reset. Default true.
+	     * @param int  $user_data->ID The ID of the user attempting to reset a password.
+	     */
+	    $allow = apply_filters( 'allow_password_reset', true, $user_data->ID );
+
+	    if ( ! $allow )
+		    return new WP_Error('no_password_reset', __('Password reset is not allowed for this user'));
+	    else if ( is_wp_error($allow) )
+		    return $allow;
+
+	    // Generate something random for a password reset key.
+	    $key = wp_generate_password( 20, false );
+
+	    /**
+	     * Fires when a password reset key is generated.
+	     *
+	     * @since 2.5.0
+	     *
+	     * @param string $user_login The username for the user.
+	     * @param string $key        The generated password reset key.
+	     */
+	    do_action( 'retrieve_password_key', $user_login, $key );
+
+	    // Now insert the key, hashed, into the DB.
+	    if ( empty( $wp_hasher ) ) {
+		    require_once ABSPATH . WPINC . '/class-phpass.php';
+		    $wp_hasher = new PasswordHash( 8, true );
+	    }
+	    $hashed = $wp_hasher->HashPassword( $key );
+	    $wpdb->update( $wpdb->users, array( 'user_activation_key' => $hashed ), array( 'user_login' => $user_login ) );
+
+	    $message = __('Someone requested that the password be reset for the following account:') . "\r\n\r\n";
+	    $message .= network_home_url( '/' ) . "\r\n\r\n";
+	    $message .= sprintf(__('Username: %s'), $user_login) . "\r\n\r\n";
+	    $message .= __('If this was a mistake, just ignore this email and nothing will happen.') . "\r\n\r\n";
+	    $message .= __('To reset your password, visit the following address:') . "\r\n\r\n";
+	    $message .= '<' . network_site_url("wp-login.php?action=rp&key=$key&login=" . rawurlencode($user_login), 'login') . ">\r\n";
+
+	    if ( is_multisite() )
+		    $blogname = $GLOBALS['current_site']->site_name;
+	    else
+		    /*
+		     * The blogname option is escaped with esc_html on the way into the database
+		     * in sanitize_option we want to reverse this for the plain text arena of emails.
+		     */
+		    $blogname = wp_specialchars_decode(get_option('blogname'), ENT_QUOTES);
+
+	    $title = sprintf( __('[%s] Password Reset'), $blogname );
+
+	    /**
+	     * Filter the subject of the password reset email.
+	     *
+	     * @since 2.8.0
+	     *
+	     * @param string $title Default email title.
+	     */
+	    $title = apply_filters( 'retrieve_password_title', $title );
+	    /**
+	     * Filter the message body of the password reset mail.
+	     *
+	     * @since 2.8.0
+	     *
+	     * @param string $message Default mail message.
+	     * @param string $key     The activation key.
+	     */
+	    $message = apply_filters( 'retrieve_password_message', $message, $key );
+
+	    if ( $message && !wp_mail( $user_email, wp_specialchars_decode( $title ), $message ) )
+		    wp_die( __('The e-mail could not be sent.') . "<br />\n" . __('Possible reason: your host may have disabled the mail() function.') );
+
+	    return true;
+    }
+
+    
 
     /**
      * Outputs the content of the widget

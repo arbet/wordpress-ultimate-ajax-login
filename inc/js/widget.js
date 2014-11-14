@@ -80,6 +80,9 @@ jQuery(document).ready(function($) {
         
         // Prevent form from being submitted
         event.preventDefault();
+
+        // Get form ID
+        var form_id = $("[name='form_id']", this).val();         
         
         // Send POST request via AJAX
         jQuery.post(ajaxurl, {
@@ -89,9 +92,9 @@ jQuery(document).ready(function($) {
            }, function (response) {
 
                 console.log(response);
-               
-               
-                           
+                
+                // Show error on dialog boxes
+                $("#ual_forgot_error_"+form_id).html(response);                                           
                
            });  
         
