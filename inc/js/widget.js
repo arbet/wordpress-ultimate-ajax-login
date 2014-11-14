@@ -49,7 +49,7 @@ jQuery(document).ready(function($) {
                    $("[id^='ual_error_']", form).html(result.error);
                    
                    // Show error on dialog boxes
-                   $("[id^='ual_dialog_]").dialog().find("[id^='ual_error_']").html(result.error);
+                   $("[id^='ual_dialog_']").dialog().find("[id^='ual_error_']").html(result.error);
                    
                    // Log error to console
                    console.log(result.error);

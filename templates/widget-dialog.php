@@ -40,17 +40,17 @@ $ual = new UAL_Template();
 <link rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
 <script type="text/javascript">
     
-    jQuery(document).ready(function() {
+    jQuery(document).ready(function($) {
+	
+	// Initialize dialog object
+	jQuery("[id^='ual_dialog_']").dialog({
+	    autoOpen: false,
+	});
 	
 	// Open dialog on link click
 	jQuery("[id^='ual_link_']").click(function() {
 
 	    jQuery("[id^='ual_dialog_']").dialog('open');
-	});
-
-	// Initialize dialog object
-	jQuery("[id^='ual_dialog_'").dialog({
-	    autoOpen: false,
 	});
 	
     });
