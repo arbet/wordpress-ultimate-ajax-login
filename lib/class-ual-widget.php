@@ -30,9 +30,10 @@ class UAL_Widget extends WP_Widget {
 	// Enqueue CSS file
 	wp_enqueue_style( 'ual-widget-css', UAL_URL.'inc/css/widget.css');
 	
-	// Add ajax action on the frontend for logged in and non-logged in users
-	add_action( 'wp_ajax_ual_ajax_login', array($this,'login_user') );
+	// Add ajax actions on the frontend for non-logged in users
 	add_action( 'wp_ajax_nopriv_ual_ajax_login', array($this,'login_user') );
+	add_action( 'wp_ajax_nopriv_ual_ajax_forgot_pw', array($this,'forgot_password') );
+	
     }
     
     /**
@@ -83,6 +84,17 @@ class UAL_Widget extends WP_Widget {
 	echo json_encode($response);
 	
 	die(); // Required for all AJAX calls
+    }
+    
+    /*
+     * Reset password AJAX functionality
+     */
+    
+    public function forgot_password(){
+	
+	echo 'forgotten password';
+	
+	die();
     }
 
     /**

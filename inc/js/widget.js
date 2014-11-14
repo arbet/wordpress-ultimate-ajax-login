@@ -35,7 +35,6 @@ jQuery(document).ready(function($) {
             data:       $(this).serialize()
            }, function (response) {
 
-                console.log(response);
                // Parse JSON response
                result = $.parseJSON(response);
 
@@ -57,21 +56,45 @@ jQuery(document).ready(function($) {
                         
                         event.preventDefault();
                         
-                        $("#ual_form_forgot_" + form_id).show('slow'); 
+                        $("#ual_forgot_form_" + form_id).show('slow'); 
                         
                         return false;
                     });
                     
                     // Cancel button in form is clicked
-                    $('#ual_form_forgot_' + form_id + ' .ual_form_forgot_cancel').on("click", function(event) {
-                        $(this).parents("[id^='ual_form_forgot_']").hide('slow');   
+                    $('#ual_forgot_form_' + form_id + ' .ual_forgot_form_cancel').on("click", function(event) {
+                        $(this).parents("[id^='ual_forgot_form_']").hide('slow');   
                         return false;
                     });                    
                }
 
                
-           });          
+           });     
+           
         
     }); 
+    
+    
+    // Forgot password form has been submitted
+    $("[id^='ual_forgot_form_']").on("submit",function ( event ) {  
+        
+        // Prevent form from being submitted
+        event.preventDefault();
+        
+        // Send POST request via AJAX
+        jQuery.post(ajaxurl, {
+
+            action:     'ual_ajax_forgot_pw',
+            data:       $(this).serialize()
+           }, function (response) {
+
+                console.log(response);
+               
+               
+                           
+               
+           });  
+        
+    });   
     
 });

@@ -87,7 +87,7 @@ $ual = new UAL_Template();
 
 <!-- Forgot Password Form -->
 
-<form id="ual_form_forgot_<?php echo $ual->form_id();?>" method="POST" style="display:none">
+<form id="ual_forgot_form_<?php echo $ual->form_id();?>" action='<?php echo site_url('wp-login.php?action=lostpassword', 'login_post'); ?>' method="POST" style="display:none">
     
     <label for='ual_fg_username_<?php $ual->form_id(); ?>'><?php _e('Enter your email address or username');?></label>        
    
@@ -95,7 +95,7 @@ $ual = new UAL_Template();
     <?php do_action('lostpassword_form'); ?>
     
     <input type="submit" value="<?php _e("Get New Password"); ?>" />
-    <a href="#" class='ual_form_forgot_cancel'><?php _e("Cancel"); ?></a>    
+    <a href="#" class='ual_forgot_form_cancel'><?php _e("Cancel"); ?></a>    
 </form>
 
 <!-- End of jQuery Dialog Box -->
