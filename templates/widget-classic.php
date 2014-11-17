@@ -36,6 +36,9 @@ $ual = new UAL_Template();
 
 ?>
 
+<!-- Forms Dialog Div Wrapper - Used with Block UI-->
+<div id="ual_div_<?php $ual->form_id(); ?>" title="<?php _e('Login Area'); ?>">
+
 <!-- Login Form -->
 <form id='ual_form_<?php $ual->form_id(); ?>' class='ual_form' method='post'>
     <div class='ual_form_item'>
@@ -74,3 +77,4 @@ $ual = new UAL_Template();
     <a href="#" class='ual_forgot_form_cancel'><?php _e("Cancel"); ?></a>    
 </form>
            
+</div> <!-- End of Ultimate Ajax Login Div -->

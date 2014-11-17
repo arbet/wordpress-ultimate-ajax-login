@@ -43,14 +43,14 @@ $ual = new UAL_Template();
     jQuery(document).ready(function($) {
 	
 	// Initialize dialog object
-	jQuery("#ual_dialog_<?php $ual->form_id(); ?>").dialog({
+	jQuery("#ual_div_<?php $ual->form_id(); ?>").dialog({
 	    autoOpen: false,
 	});
 	
 	// Open dialog on link click
 	jQuery("#ual_link_<?php $ual->form_id(); ?>").click(function() {
 
-	    jQuery("#ual_dialog_<?php $ual->form_id(); ?>").dialog('open');
+	    jQuery("#ual_div_<?php $ual->form_id(); ?>").dialog('open');
 	});
 	
     });
@@ -60,8 +60,8 @@ $ual = new UAL_Template();
 <!-- Login button code -->
 <button id="ual_link_<?php $ual->form_id(); ?>"><?php _e('Login Here'); ?></button>
 
-<!-- Forms Dialog Box -->
-<div id="ual_dialog_<?php $ual->form_id(); ?>" title="<?php _e('Login Area'); ?>">
+<!-- Forms Dialog Div -->
+<div id="ual_div_<?php $ual->form_id(); ?>" title="<?php _e('Login Area'); ?>">
     
     <!-- Login form -->
     <form id='ual_form_<?php $ual->form_id(); ?>' class='ual_form' method='post'>

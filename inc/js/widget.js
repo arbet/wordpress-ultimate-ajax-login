@@ -29,7 +29,7 @@ jQuery(document).ready(function($) {
         var form_id = $("[name='form_id']", this).val();                
         
         // Block ajax interface
-        $('#ual_form_' + form_id).block({ message: null }); 
+        $('#ual_div_' + form_id).block({ message: null }); 
         
         // Send POST request via AJAX
         jQuery.post(ajaxurl, {
@@ -39,7 +39,7 @@ jQuery(document).ready(function($) {
            }, function (response) {
 
                 // Unblock UI
-                $('#ual_form_' + form_id).unblock(); 
+                $('#ual_div_' + form_id).unblock(); 
                 
                // Parse JSON response
                result = $.parseJSON(response);
@@ -102,6 +102,9 @@ jQuery(document).ready(function($) {
         // Get form ID
         var form_id = $("[name='form_id']", this).val();         
         
+        // Block ajax interface
+        $('#ual_div_' + form_id).block({ message: null }); 
+        
         // Send POST request via AJAX
         jQuery.post(ajaxurl, {
 
@@ -109,9 +112,10 @@ jQuery(document).ready(function($) {
             data:       $(this).serialize()
            }, function (response) {
 
-                console.log(response);
+                // Unblock UI
+                $('#ual_div_' + form_id).unblock();
                 
-                // Show error on dialog boxes
+            // Show error on dialog boxes
                 $("#ual_forgot_error_"+form_id).html(response);                                           
                
            });  
