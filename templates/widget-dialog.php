@@ -37,7 +37,7 @@ $ual = new UAL_Template();
 ?>
 
 <!-- Load jquery UI theme change to suit your needs-->
-<link rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css" />
 <script type="text/javascript">
     
     jQuery(document).ready(function($) {
