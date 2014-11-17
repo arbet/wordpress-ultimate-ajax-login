@@ -28,6 +28,9 @@ jQuery(document).ready(function($) {
         // Get form ID
         var form_id = $("[name='form_id']", this).val();                
         
+        // Block ajax interface
+        $('#ual_form_' + form_id).block({ message: null }); 
+        
         // Send POST request via AJAX
         jQuery.post(ajaxurl, {
 
@@ -35,6 +38,9 @@ jQuery(document).ready(function($) {
             data:       $(this).serialize()
            }, function (response) {
 
+                // Unblock UI
+                $('#ual_form_' + form_id).unblock(); 
+                
                // Parse JSON response
                result = $.parseJSON(response);
 

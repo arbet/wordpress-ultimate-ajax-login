@@ -24,6 +24,8 @@ class UAL_Widget extends WP_Widget {
 	// Include Ajax library on frontend, uncomment if not needed
 	add_action( 'wp_head', array( $this, 'add_ajax_library' ) );
 	
+	// Enqueue Block UI jQuery plugin
+	wp_enqueue_script( 'ual-blockui-js', UAL_URL.'inc/js/jquery.blockUI.js', array('jquery') );
 	// Enqueue JS file
 	wp_enqueue_script( 'ual-widget-js', UAL_URL.'inc/js/widget.js', array('jquery', 'jquery-ui-dialog') );
 	
