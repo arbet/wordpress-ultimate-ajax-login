@@ -13,7 +13,7 @@ if(!empty($_POST)){
 ?>
 
 <div class="wrap">
-<h2>Page Title Goes Here</h2>
+<h2>Ultimate AJAX Login Settings</h2>
 
 <form method="post" action="options-general.php?page=ultimate_ajax_login"> 
 

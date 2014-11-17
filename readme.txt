@@ -1,114 +1,49 @@
-=== Plugin Name ===
-Contributors: (this should be a list of wordpress.org userid's)
-Donate link: http://example.com/
-Tags: comments, spam
-Requires at least: 3.0.1
-Tested up to: 3.4
-Stable tag: 4.3
+=== Ultimate AJAX Login ===
+Contributors: arbet01
+Tags: admin, AJAX, AJAX login, buddypress, login, multi-site, redirect, registration, sidebar, jquery, popup, dialog, login dialog, login popup, mobile
+Requires at least: 3.1
+Tested up to: 4.0
+Stable tag: 1.0.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Here is a short description of the plugin.  This should be no more than 150 characters.  No markup here.
+Very flexible and easy to use AJAX Login plugin with redirects, customizable templates...
 
 == Description ==
 
-This is the long description.  No limit, and you can use Markdown (as well as in the following sections).
+After testing all of the AJAX plugins in the Wordpress repository, I got frustrated. They're all great, but it seems that they're like 90% complete. They still need polishing.  This is why I decided to create this plugin
 
-For backwards compatibility, if this section is missing, the full length of the short description will be used, and
-Markdown parsed.
+How is this plugin different:
 
-A few notes about the sections above:
-
-*   "Contributors" is a comma separated list of wp.org/wp-plugins.org usernames
-*   "Tags" is a comma separated list of tags that apply to the plugin
-*   "Requires at least" is the lowest version that the plugin will work on
-*   "Tested up to" is the highest version that you've *successfully used to test the plugin*. Note that it might work on
+*   Fully customizable: Just copy the template you're using from /templates/ directory in the plugin to the "ultimate_ajax_login" directory in your theme, and modify as you need to.
+*   After a user is logged in, nothing shows up. I found this pretty frustrating with other plugins, there was no way to hide things.
+*   If you need to show anything after a user logs in, just copy the template widget-logged-in.php to your ultimate_ajax_login folder and add whatever you need. You can call any WP function from there.
+*   Has two templates, one an AJAX-based classic login form, and the other is a jQuery UI dialog box (Tested and works on mobile)
 higher versions... this is just the highest one you've verified.
-*   Stable tag should indicate the Subversion "tag" of the latest stable version, or "trunk," if you use `/trunk/` for
-stable.
+* Blocks the login form whenever a user is being logged in.
+*   Allows you to specify the login redirect URL in your settings page. If left blank, it just refreshes the current page. 
 
-    Note that the `readme.txt` of the stable tag is the one that is considered the defining one for the plugin, so
-if the `/trunk/readme.txt` file says that the stable tag is `4.3`, then it is `/tags/4.3/readme.txt` that'll be used
-for displaying information about the plugin.  In this situation, the only thing considered from the trunk `readme.txt`
-is the stable tag pointer.  Thus, if you develop in trunk, you can update the trunk `readme.txt` to reflect changes in
-your in-development version, without having that information incorrectly disclosed about the current stable version
-that lacks those changes -- as long as the trunk's `readme.txt` points to the correct stable tag.
-
-    If no stable tag is provided, it is assumed that trunk is stable, but you should specify "trunk" if that's where
-you put the stable version, in order to eliminate any doubt.
-
+    
 == Installation ==
 
-This section describes how to install the plugin and get it working.
-
-e.g.
-
-1. Upload `plugin-name.php` to the `/wp-content/plugins/` directory
-1. Activate the plugin through the 'Plugins' menu in WordPress
-1. Place `<?php do_action('plugin_name_hook'); ?>` in your templates
+1. Install the plugin as usual
+1. Go to Settings -> Ultimate AJAX Login if you need to specify a login redirect URL
+1. Go to Appearance -> Widgets, add your widget and select the template you want to use
 
 == Frequently Asked Questions ==
 
-= A question that someone might have =
+= My widget does not show up =
 
-An answer to that question.
-
-= What about foo bar? =
-
-Answer to foo bar dilemma.
+Make sure you are logged out of the site. It will not display anything by default. You can always display a message for logged in users by copying the widget-logged-in.php file from */ultimate-ajax-login/templates* to a directory called *ultimate_ajax_login* in your active theme. Create the directory if it does not exist
 
 == Screenshots ==
 
-1. This screen shot description corresponds to screenshot-1.(png|jpg|jpeg|gif). Note that the screenshot is taken from
-the /assets directory or the directory that contains the stable readme.txt (tags or trunk). Screenshots in the /assets 
-directory take precedence. For example, `/assets/screenshot-1.png` would win over `/tags/4.3/screenshot-1.png` 
-(or jpg, jpeg, gif).
-2. This is the second screen shot
+1. Widget as it shows under Appearance -> Widgets
+2. Classic Widget in footer sidebar
+3. Dialog Widget after user clicks login button
+4. Settings page Screenshot
 
 == Changelog ==
 
-= 1.0 =
-* A change since the previous version.
-* Another change.
-
-= 0.5 =
-* List versions from most recent at top to oldest at bottom.
-
-== Upgrade Notice ==
-
-= 1.0 =
-Upgrade notices describe the reason a user should upgrade.  No more than 300 characters.
-
-= 0.5 =
-This version fixes a security related bug.  Upgrade immediately.
-
-== Arbitrary section ==
-
-You may provide arbitrary sections, in the same format as the ones above.  This may be of use for extremely complicated
-plugins where more information needs to be conveyed that doesn't fit into the categories of "description" or
-"installation."  Arbitrary sections will be shown below the built-in sections outlined above.
-
-== A brief Markdown Example ==
-
-Ordered list:
-
-1. Some feature
-1. Another feature
-1. Something else about the plugin
-
-Unordered list:
-
-* something
-* something else
-* third thing
-
-Here's a link to [WordPress](http://wordpress.org/ "Your favorite software") and one to [Markdown's Syntax Documentation][markdown syntax].
-Titles are optional, naturally.
-
-[markdown syntax]: http://daringfireball.net/projects/markdown/syntax
-            "Markdown is what the parser uses to process much of the readme file"
-
-Markdown uses email style notation for blockquotes and I've been told:
-> Asterisks for *emphasis*. Double it up  for **strong**.
-
-`<?php code(); // goes in backticks ?>`
+= 1.0.1 =
+* Initial push to wordpress repository

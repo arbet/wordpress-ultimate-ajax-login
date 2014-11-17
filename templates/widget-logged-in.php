@@ -20,6 +20,6 @@
 
 /*
  * Displayed for logged in users
+ * 
+ * Default is to display nothing. If you wish to display anything, copy this file to a folder called ultimate_ajax_login in your active theme directory and modify it as needed 
  */
-
-echo "<span class='ual_logged_in'>You are already logged in</span>";
