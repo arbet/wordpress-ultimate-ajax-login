@@ -44,6 +44,10 @@ Instead of using the widget, you can insert the shortcode inside any post. If yo
 
 Make sure you are logged out of the site. It will not display anything by default. You can always display a message for logged in users by copying the widget-logged-in.php file from */ultimate-ajax-login/templates* to a directory called *ultimate_ajax_login* in your active theme. Create the directory if it does not exist
 
+= How do I change the jQuery UI styling in dialog box? =
+
+Just copy the template widget-dialog.php to ultimate_ajax_login/widget-dialog.php in your active theme directory , and change the CSS link on the top of the file to point to the style you want
+
 == Screenshots ==
 
 1. Widget as it shows under Appearance -> Widgets
