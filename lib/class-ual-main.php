@@ -28,11 +28,14 @@ class UAL_Main {
      */
     public function insert_shortcode($atts) {
 	
+	// Defaults to no redirect, and uses the classic template
+	$default = array('redirect_login' => '', 'template' => 'classic');
+	
 	// Merge user attributes with our default attributes	
-	$atts = shortcode_atts($default, $atts, 'ultimate_ajax_login');
+	$all_atts = shortcode_atts($default, $atts, 'ultimate_ajax_login');
 	
 	// Send back our widget
-	return the_widget('UAL_Widget',$atts);
+	return the_widget('UAL_Widget',$all_atts);
     }
     
     /*

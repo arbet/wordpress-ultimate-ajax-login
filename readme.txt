@@ -25,6 +25,13 @@ higher versions... this is just the highest one you've verified.
 * Login redirect URL can be overridden on a per-widget basis from the widget options page.
 
     
+*Shortcode Usage*
+
+Instead of using the widget, you can insert the shortcode inside any post. If you're a theme developer, you can use it with the do_shortcode() function. Here are the varius option
+
+* Using with classic template and no redirect url specified: _[ultimate_ajax_login]_ 
+* Using the dialog box template: _[ultimate_ajax_login template='dialog']_
+
 == Installation ==
 
 1. Install the plugin as usual
