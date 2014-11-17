@@ -40,7 +40,19 @@ jQuery(document).ready(function($) {
 
                // User has logged in, reload page
                if(result.logged_in === true){
-                   location.reload();
+                   
+                   // Check if redirect URL is set
+                   if (result.hasOwnProperty('redirect')){
+                       
+                       // Redirect user to set URL
+                       $(location).attr('href', result.redirect);
+                   }
+                   
+                   // No URL is set, reload page
+                   else{
+                        location.reload();    
+                   }
+                   
                }
                
                // Invalid login, display error message

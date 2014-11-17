@@ -30,17 +30,14 @@ do_settings_sections( 'ual-site-options' );
 <table class="form-table">	
         <tr valign="top">
         <th scope="row">Login Redirect URL</th>
-        <td><input type='text' name='ual_redirect_login' value='<?php echo get_option('ual_redirect_login')?>' />
+        <td><input type='text' name='ual_redirect_login' class='widefat' value='<?php echo get_option('ual_redirect_login')?>' />
 	    <p class="description">
-		Absolute URL to redirect user to after logging in. If left blank, user will stay on current page
-	    </p>	    	    
-	</td>
-        </tr>	
-         <tr valign="top">
-        <th scope="row">Logout Redirect URL</th>
-        <td><input type='text' name='ual_redirect_logout' value='<?php echo get_option('ual_redirect_logout')?>' />
-	    <p class="description">
-		Absolute URL to redirect user to after logout. If left blank, user will stay on current page
+		URL to redirect user to after logging in. If left blank, user will stay on current page. If invalid or external URL is entered, it will redirect to dashboard.<br/>Acceptable Values
+	    <ol>
+		<li><em>/hello-world/</em> or any other relative URL</li>
+		<li><em><?php echo site_url('/hello-world/')."</em> or any absolute URL belonging to site";?></li>
+		<li>Any other value will redirect to dashboard</li>
+	    </ol>
 	    </p>	    	    
 	</td>
         </tr>		

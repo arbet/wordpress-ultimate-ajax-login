@@ -78,6 +78,15 @@ class UAL_Widget extends WP_Widget {
 	// User successfully logged in
 	else {
 	    $response['logged_in'] = true;
+	    
+	    // Redirect user upon login
+	    $redirect = get_option('ual_redirect_login');
+	    
+	    // If redirect is not empty, set the redirect flag
+	    if(!empty($redirect)){
+		$response['redirect'] = $redirect;
+	    }
+	    
 	}
 	
 	// Encode and send data

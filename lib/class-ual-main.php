@@ -18,6 +18,7 @@ class UAL_Main {
 	
 	// Register  options page on site admin and network admin
 	add_action('admin_menu', array($this, 'register_site_options_pages'));
+	
     }
     
     /*
@@ -44,13 +45,8 @@ class UAL_Main {
 	
 	// Add site settings page
 	add_submenu_page( 'options-general.php', 'Ultimate AJAX Login Options', 'Ultimate AJAX Login', 'manage_options', 'ultimate_ajax_login', array($this, 'display_site_options_page') );	
-	// Login redirect option
-	register_setting( 'ual-site-options', 
-		'ual_redirect_logout', 
-		'esc_url_raw' // Validates the URL
-	);
 	
-	// Logout redirect option
+	// Login redirect option
 	register_setting( 'ual-site-options', 
 		'ual_redirect_login', 
 		'esc_url_raw' // Validates the URL
@@ -64,9 +60,15 @@ class UAL_Main {
      */
     static function save_site_options(){
 	
+	// Get login redirect URL
+	$redirect_login = $_POST['ual_redirect_login'];
+	
+	// Validate the URL
+	$sanitized_location = wp_sanitize_redirect($redirect_login);	
+	$valid_location = wp_validate_redirect($sanitized_location, admin_url());
+	
 	// Read $_POST fields, and use update_option function to save
-	update_option('ual_redirect_login', $_POST['ual_redirect_login']);
-	update_option('ual_redirect_logout', $_POST['ual_redirect_logout']);
+	update_option('ual_redirect_login', $valid_location);
 	
     }
     
