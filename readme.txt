@@ -21,7 +21,8 @@ How is this plugin different:
 *   Has two templates, one an AJAX-based classic login form, and the other is a jQuery UI dialog box (Tested and works on mobile)
 higher versions... this is just the highest one you've verified.
 * Blocks the login form whenever a user is being logged in.
-*   Allows you to specify the login redirect URL in your settings page. If left blank, it just refreshes the current page. 
+*   Allows you to specify a global login redirect URL in your settings page, which applies to all of your widgets.
+* Login redirect URL can be overridden on a per-widget basis from the widget options page.
 
     
 == Installation ==

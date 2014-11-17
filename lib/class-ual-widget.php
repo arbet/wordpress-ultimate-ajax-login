@@ -6,9 +6,6 @@
  */
 class UAL_Widget extends WP_Widget {
 
-    // Holds the widget instance array
-    private $instance = false;
-
     /**
      * Sets up the widgets name etc
      */
@@ -81,8 +78,29 @@ class UAL_Widget extends WP_Widget {
 	else {
 	    $response['logged_in'] = true;
 	    
-	    // Redirect user upon login
-	    $redirect = get_option('ual_redirect_login');
+	    
+	    // Get widget settings - popping because result is 2D array with one key as widget ID
+	    $widget_settings = $this->get_settings();
+	    $settings = array_pop($widget_settings);
+	    
+	    // Get login redirect option
+	    $redirect_login = $settings['redirect_login'];
+	    
+	    // Check if the widget has a redirect URL of its own
+	    if( ! empty ( $redirect_login ) ) {
+		
+		$redirect = $redirect_login;
+	    
+	    }
+	    
+	    // Specific widget option is not set, use site specific option
+	    else {
+
+		// Redirect user upon login
+		$redirect = get_option('ual_redirect_login');
+		
+	    }
+
 	    
 	    // If redirect is not empty, set the redirect flag
 	    if(!empty($redirect)){
@@ -277,6 +295,7 @@ class UAL_Widget extends WP_Widget {
      */
     public function widget( $args, $instance ) {		     	        	 
 	
+	// Set default template if not set
 	$template = isset($instance['template'])?$instance['template']:'classic';
 	
 	// Show template based on user status
@@ -310,6 +329,15 @@ class UAL_Widget extends WP_Widget {
 	else {
 	    $template = 'classic';
 	}
+	
+	// If redirect URL is set, display it
+	if ( isset( $instance[ 'redirect_login' ] ) ) {
+	    $redirect_url = $instance[ 'redirect_login' ];
+	}
+	// Use default height
+	else {
+	    $redirect_url = '';
+	}	
    
 	?>
 	<p>
@@ -319,6 +347,10 @@ class UAL_Widget extends WP_Widget {
 		<option value="classic" <?php echo ($template === 'classic')?"selected='selected'":""; ?>>Classic</option>
 		<option value="dialog" <?php echo ($template === 'dialog')?"selected='selected'":""; ?>>Dialog Box</option>
 	    </select>
+	    
+	    <!-- Redirect URL Field -->
+	    <label for="<?php echo $this->get_field_id( 'redirect_login' ); ?>"><?php _e( 'Override Redirect URL in Settings Page' ); ?></label> 
+	    <input class="widefat" id="<?php echo $this->get_field_id( 'redirect_login' ); ?>" name="<?php echo $this->get_field_name( 'redirect_login' ); ?>" type="text" value="<?php echo esc_attr( $redirect_url ); ?>">
 	</p>
 
 	<?php 
@@ -338,7 +370,14 @@ class UAL_Widget extends WP_Widget {
 	
 	// Save user template
 	$instance['template'] = ( ! empty( $new_instance['template'] ) ) ? strip_tags( $new_instance['template'] ) : '';	    
-
+	
+	// Validate the URL
+	$sanitized_location = wp_sanitize_redirect($new_instance['redirect_login'] );	
+	$valid_location = wp_validate_redirect($sanitized_location, admin_url());
+	
+	// Assign new URL to instance
+	$instance['redirect_login'] = $valid_location;
+	
 	// Return values to be saved
 	return $instance;	    
     }

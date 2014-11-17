@@ -28,9 +28,6 @@ class UAL_Main {
      */
     public function insert_shortcode($atts) {
 	
-	// Default attributes for shortcode
-	$default = array('key1' => 'val1', 'key2' => 'val2');
-	
 	// Merge user attributes with our default attributes	
 	$atts = shortcode_atts($default, $atts, 'ultimate_ajax_login');
 	
