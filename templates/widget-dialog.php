@@ -36,15 +36,13 @@ $ual = new UAL_Template();
 
 ?>
 
-<!-- Load jquery UI theme change to suit your needs-->
-<link rel="stylesheet" type='text/css' href="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/themes/smoothness/jquery-ui.css" />
 <script type="text/javascript">
     
     jQuery(document).ready(function($) {
 	
 	// Initialize dialog object
 	jQuery("#ual_div_<?php $ual->form_id(); ?>").dialog({
-	    autoOpen: false,
+	    autoOpen: false
 	});
 	
 	// Open dialog on link click

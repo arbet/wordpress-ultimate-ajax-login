@@ -15,6 +15,8 @@ After testing all of the AJAX plugins in the Wordpress repository, I got frustra
 
 How is this plugin different:
 
+*   Classic login form and popup login form (jQuery UI based)
+*   24 themes to choose from (jQuery UI based)  
 *   Fully customizable: Just copy the template you're using from /templates/ directory in the plugin to the "ultimate_ajax_login" directory in your theme, and modify as you need to.
 *   After a user is logged in, nothing shows up. I found this pretty frustrating with other plugins, there was no way to hide things.
 *   If you need to show anything after a user logs in, just copy the template widget-logged-in.php to your ultimate_ajax_login folder and add whatever you need. You can call any WP function from there.
@@ -31,6 +33,7 @@ Instead of using the widget, you can insert the shortcode inside any post. If yo
 
 * Using with classic template and no redirect url specified: _[ultimate_ajax_login]_ 
 * Using the dialog box template: _[ultimate_ajax_login template='dialog']_
+* Using the dialog box template and a jquery theme: _[ultimate_ajax_login template='dialog' theme='cupertino']_
 
 == Installation ==
 

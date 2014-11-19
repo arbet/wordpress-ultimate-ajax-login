@@ -26,8 +26,9 @@ class UAL_Widget extends WP_Widget {
 	// Enqueue JS file
 	wp_enqueue_script( 'ual-widget-js', UAL_URL.'inc/js/widget.js', array('jquery', 'jquery-ui-dialog') );
 	
-	// Enqueue CSS file
+	// Enqueue CSS files
 	wp_enqueue_style( 'ual-widget-css', UAL_URL.'inc/css/widget.css');
+	
 	
 	// Add ajax actions on the frontend for non-logged in users
 	add_action( 'wp_ajax_nopriv_ual_ajax_login', array($this,'login_user') );
@@ -293,10 +294,19 @@ class UAL_Widget extends WP_Widget {
      * @param array $args
      * @param array $instance
      */
-    public function widget( $args, $instance ) {		     	        	 
+    public function widget( $args, $instance ) {	
+	
+	// Set jQuery UI theme if not set
+	$theme = isset($instance['theme'])?$instance['theme']:'smoothness';
 	
 	// Set default template if not set
 	$template = isset($instance['template'])?$instance['template']:'classic';
+	
+	// Enqueue the widget jQuery UI theme if it hasn't been already
+	if ( ! wp_style_is( 'ual-jqueryui' ) ){
+	    wp_enqueue_style( 'ual-jqueryui', UAL_URL.'lib/jqueryui/themes/'.$theme.'/jquery-ui.min.css');
+	}
+	
 	
 	// Show template based on user status
 	if( ! is_user_logged_in() ){
@@ -329,6 +339,16 @@ class UAL_Widget extends WP_Widget {
 	else {
 	    $template = 'classic';
 	}
+
+	// If jquery theme is set, use it
+	if ( isset( $instance[ 'theme' ] ) ) {
+	    $theme = $instance[ 'theme' ];
+	}
+	// Use classic template
+	else {
+	    $theme = 'smoothness';
+	}
+	
 	
 	// If redirect URL is set, display it
 	if ( isset( $instance[ 'redirect_login' ] ) ) {
@@ -341,13 +361,39 @@ class UAL_Widget extends WP_Widget {
    
 	?>
 	<p>
-	    <!-- Widget Option Title Field -->
+	    <!-- Widget Template Select Field -->
 	    <label for="<?php echo $this->get_field_id( 'template' ); ?>"><?php _e( 'Form Template' ); ?></label> 
 	    <select class="widefat" id="<?php echo $this->get_field_id( 'template' ); ?>" name="<?php echo $this->get_field_name( 'template' ); ?>">
 		<option value="classic" <?php echo ($template === 'classic')?"selected='selected'":""; ?>>Classic</option>
 		<option value="dialog" <?php echo ($template === 'dialog')?"selected='selected'":""; ?>>Dialog Box</option>
 	    </select>
-	    
+	    <br/><br/>
+	    <!-- Widget Theme Select Field -->
+	    <label for="<?php echo $this->get_field_id( 'theme' ); ?>"><?php _e( 'Widget Theme - Only for Dialog Template' ); ?></label> 
+	    <select class="widefat" id="<?php echo $this->get_field_id( 'theme' ); ?>" name="<?php echo $this->get_field_name( 'theme' ); ?>">
+		
+		<?php 	
+		
+			// Get themes path
+			$themes_path = UAL_PATH.'/lib/jqueryui/themes/';
+			
+			// Get list of themes in our directory
+			$themes = scandir($themes_path);
+			
+			// Add theme to select box
+			foreach($themes as $key=> $dir){
+			    
+			    // List all directories that are different from current directory and parent directory
+			    if(is_dir($themes_path.$dir) && $dir!='.' && $dir !='..'){
+				echo "<option value='$dir'";
+				echo ($theme === $dir)?"selected='selected'":"";
+				echo ">$dir</option>";
+			    }
+			}
+			
+		?>
+	    </select>
+	    <br/><br/>
 	    <!-- Redirect URL Field -->
 	    <label for="<?php echo $this->get_field_id( 'redirect_login' ); ?>"><?php _e( 'Override Redirect URL in Settings Page' ); ?></label> 
 	    <input class="widefat" id="<?php echo $this->get_field_id( 'redirect_login' ); ?>" name="<?php echo $this->get_field_name( 'redirect_login' ); ?>" type="text" value="<?php echo esc_attr( $redirect_url ); ?>">
@@ -369,7 +415,10 @@ class UAL_Widget extends WP_Widget {
 	$instance = array();
 	
 	// Save user template
-	$instance['template'] = ( ! empty( $new_instance['template'] ) ) ? strip_tags( $new_instance['template'] ) : '';	    
+	$instance['template'] = ( ! empty( $new_instance['template'] ) ) ? strip_tags( $new_instance['template'] ) : '';	
+	
+	// Save jQuery Theme
+	$instance['theme'] = ( ! empty( $new_instance['theme'] ) ) ? strip_tags( $new_instance['theme'] ) : '';
 	
 	// Validate the URL
 	$sanitized_location = wp_sanitize_redirect($new_instance['redirect_login'] );	
