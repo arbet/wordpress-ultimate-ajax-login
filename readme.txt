@@ -3,7 +3,7 @@ Contributors: arbet01
 Tags: admin, AJAX, AJAX login, login, multi-site, redirect, registration, sidebar, jquery, popup, dialog, login dialog, login popup, mobile
 Requires at least: 3.1
 Tested up to: 4.0
-Stable tag: 1.0.1
+Stable tag: 1.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -15,7 +15,7 @@ After testing all of the AJAX plugins in the Wordpress repository, I got frustra
 
 How is this plugin different:
 
-*   Classic login form and popup login form (jQuery UI based)
+*   Three different templates to choose from: Modal login form, Classic login form and popup login form (jQuery UI based)
 *   24 themes to choose from (jQuery UI based)  
 *   Fully customizable: Just copy the template you're using from /templates/ directory in the plugin to the "ultimate_ajax_login" directory in your theme, and modify as you need to.
 *   After a user is logged in, nothing shows up. I found this pretty frustrating with other plugins, there was no way to hide things.
@@ -56,9 +56,12 @@ Just copy the template widget-dialog.php to ultimate_ajax_login/widget-dialog.ph
 1. Widget as it shows under Appearance -> Widgets
 2. Classic Widget in footer sidebar
 3. Dialog Widget after user clicks login button
-4. Settings page Screenshot
+4. Modal login form on Twenty Fourteen theme
 
 == Changelog ==
+
+= 1.1 = 
+* Added a new modal layout
 
 = 1.0.1 =
 * Initial push to wordpress repository

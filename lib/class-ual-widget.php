@@ -25,10 +25,12 @@ class UAL_Widget extends WP_Widget {
 	wp_enqueue_script( 'ual-blockui-js', UAL_URL.'inc/js/jquery.blockUI.js', array('jquery') );
 	// Enqueue JS file
 	wp_enqueue_script( 'ual-widget-js', UAL_URL.'inc/js/widget.js', array('jquery', 'jquery-ui-dialog') );
+	// Enqueue Popmodal JS
+	wp_enqueue_script('ual-popmodal-js', UAL_URL.'lib/jquery-popmodal/popModal.min.js', array('jquery'), false, true);
 	
 	// Enqueue CSS files
 	wp_enqueue_style( 'ual-widget-css', UAL_URL.'inc/css/widget.css');
-	
+	wp_enqueue_style( 'ual-popmodal-css', UAL_URL.'lib/jquery-popmodal/popModal.min.css');
 	
 	// Add ajax actions on the frontend for non-logged in users
 	add_action( 'wp_ajax_nopriv_ual_ajax_login', array($this,'login_user') );
@@ -344,7 +346,7 @@ class UAL_Widget extends WP_Widget {
 	if ( isset( $instance[ 'theme' ] ) ) {
 	    $theme = $instance[ 'theme' ];
 	}
-	// Use classic template
+	// Use default jquery theme
 	else {
 	    $theme = 'smoothness';
 	}
@@ -366,6 +368,7 @@ class UAL_Widget extends WP_Widget {
 	    <select class="widefat" id="<?php echo $this->get_field_id( 'template' ); ?>" name="<?php echo $this->get_field_name( 'template' ); ?>">
 		<option value="classic" <?php echo ($template === 'classic')?"selected='selected'":""; ?>>Classic</option>
 		<option value="dialog" <?php echo ($template === 'dialog')?"selected='selected'":""; ?>>Dialog Box</option>
+		<option value="popmodal" <?php echo ($template === 'popmodal')?"selected='selected'":""; ?>>Modal Form</option>		
 	    </select>
 	    <br/><br/>
 	    <!-- Widget Theme Select Field -->

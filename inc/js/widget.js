@@ -21,7 +21,7 @@ jQuery(document).ready(function($) {
     
     // Detect form submission
     $("[id^='ual_form_']").on("submit",function ( event ) {                
-       
+
         // Prevent form from being submitted
         event.preventDefault();
         
