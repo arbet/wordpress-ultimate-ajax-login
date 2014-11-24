@@ -1,6 +1,6 @@
 === Ultimate AJAX Login ===
 Contributors: arbet01
-Tags: admin, AJAX, AJAX login, buddypress, login, multi-site, redirect, registration, sidebar, jquery, popup, dialog, login dialog, login popup, mobile
+Tags: admin, AJAX, AJAX login, login, multi-site, redirect, registration, sidebar, jquery, popup, dialog, login dialog, login popup, mobile
 Requires at least: 3.1
 Tested up to: 4.0
 Stable tag: 1.0.1
