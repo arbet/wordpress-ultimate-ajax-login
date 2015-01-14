@@ -37,7 +37,7 @@ $ual = new UAL_Template();
 ?>
 
 <!-- Forms Dialog Div Wrapper - Used with Block UI-->
-<div id="ual_div_<?php $ual->form_id(); ?>" title="<?php _e('Login Area'); ?>">
+<div id="ual_div_<?php $ual->form_id(); ?>" title="<?php echo get_option('ual_login_button_text'); ?>">
 
 <!-- Login Form -->
 <form id='ual_form_<?php $ual->form_id(); ?>' class='ual_form' method='post'>
@@ -55,7 +55,7 @@ $ual = new UAL_Template();
     </div>
     <div class='ual_item ual_error error' id='ual_error_<?php $ual->form_id(); ?>'></div>
     <div class='ual_item'>
-	<input type='submit' value='<?php echo _e('Login'); ?>' class='ual_field ual_button'/>
+	<input type='submit' value='<?php echo get_option('ual_login_button_text'); ?>' class='ual_field ual_button'/>
     </div>
     <input type="hidden" name='form_id' value="<?php $ual->form_id(); ?>" />
 </form> <!-- End of Login Form -->

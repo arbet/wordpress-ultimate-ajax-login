@@ -50,7 +50,13 @@ class UAL_Main {
 	register_setting( 'ual-site-options', 
 		'ual_redirect_login', 
 		'esc_url_raw' // Validates the URL
-	);	
+	);
+	
+	// Login Button text
+	register_setting( 'ual-site-options', 
+		'ual_login_button_text', 
+		'wp_kses_post' // Allows HTML tags
+	);		
 		
     }
     
@@ -63,12 +69,16 @@ class UAL_Main {
 	// Get login redirect URL
 	$redirect_login = $_POST['ual_redirect_login'];
 	
+	// Get login button text
+	$login_button_text = $_POST['ual_login_button_text'];
+	
 	// Validate the URL
 	$sanitized_location = wp_sanitize_redirect($redirect_login);	
 	$valid_location = wp_validate_redirect($sanitized_location, admin_url());
 	
 	// Read $_POST fields, and use update_option function to save
 	update_option('ual_redirect_login', $valid_location);
+	update_option('ual_login_button_text', $login_button_text);
 	
     }
     

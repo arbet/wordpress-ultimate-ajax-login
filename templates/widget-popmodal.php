@@ -66,7 +66,7 @@ $ual = new UAL_Template();
 </script>
 
 <!-- Login button code -->
-<button id="ual_link_<?php $ual->form_id(); ?>"><?php _e('Login Here'); ?></button>
+<button id="ual_link_<?php $ual->form_id(); ?>"><?php echo get_option('ual_login_button_text'); ?></button>
 
 <!-- Forms Dialog Div -->
 <div id="ual_div_<?php $ual->form_id(); ?>" style='display:none'>

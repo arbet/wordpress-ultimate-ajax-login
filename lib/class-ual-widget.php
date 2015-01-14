@@ -399,7 +399,7 @@ class UAL_Widget extends WP_Widget {
 	    <br/><br/>
 	    <!-- Redirect URL Field -->
 	    <label for="<?php echo $this->get_field_id( 'redirect_login' ); ?>"><?php _e( 'Override Redirect URL in Settings Page' ); ?></label> 
-	    <input class="widefat" id="<?php echo $this->get_field_id( 'redirect_login' ); ?>" name="<?php echo $this->get_field_name( 'redirect_login' ); ?>" type="text" value="<?php echo esc_attr( $redirect_url ); ?>">
+	    <input class="widefat" id="<?php echo $this->get_field_id( 'redirect_login' ); ?>" name="<?php echo $this->get_field_name( 'redirect_login' ); ?>" type="text" value="<?php echo esc_attr( $redirect_url ); ?>"><br/><br/>
 	</p>
 
 	<?php 
@@ -463,6 +463,11 @@ class UAL_Widget extends WP_Widget {
 	
 	// Require template parser
 	require_once(UAL_PATH.'/lib/class-ual-template.php');
+	
+	
+	// Get widget settings which will be used in all templates
+	$widget_settings = $this->get_settings();
+	$settings = array_pop($widget_settings);
 	
 	// Load template
 	require_once($template);

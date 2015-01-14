@@ -29,7 +29,16 @@ do_settings_sections( 'ual-site-options' );
 ?>
 <table class="form-table">	
         <tr valign="top">
-        <th scope="row">Login Redirect URL</th>
+        <th scope="row">Login Button Text</th>
+        <td><input type='text' name='ual_login_button_text' class='widefat' value='<?php echo get_option('ual_login_button_text')?>' />
+	    <p class="description">
+		By default, the text <em><strong>Login</strong></em> is displayed on all the login buttons. You can override it here, by changing it to something else, such as <em><strong>Click Here to Login</strong></em>, <em><strong>Login Now</strong></em>...
+	    </p>	    	    
+	</td>
+        </tr>	
+	
+        <tr valign="top">
+        <th scope="row">Successful Login URL</th>
         <td><input type='text' name='ual_redirect_login' class='widefat' value='<?php echo get_option('ual_redirect_login')?>' />
 	    <p class="description">
 		URL to redirect user to after logging in. If left blank, user will stay on current page. If invalid or external URL is entered, it will redirect to dashboard.<br/>Acceptable Values
