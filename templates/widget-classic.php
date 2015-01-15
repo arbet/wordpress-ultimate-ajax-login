@@ -39,6 +39,7 @@ $ual = new UAL_Template();
 <!-- Forms Dialog Div Wrapper - Used with Block UI-->
 <div id="ual_div_<?php $ual->form_id(); ?>" title="<?php echo get_option('ual_login_button_text'); ?>">
 
+    <div class="ual_text_above"><?php echo get_option('ual_text_above_form'); ?></div>
 <!-- Login Form -->
 <form id='ual_form_<?php $ual->form_id(); ?>' class='ual_form' method='post'>
     <div class='ual_form_item'>

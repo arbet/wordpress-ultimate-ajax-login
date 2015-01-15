@@ -71,6 +71,8 @@ $ual = new UAL_Template();
 <!-- Forms Dialog Div -->
 <div id="ual_div_<?php $ual->form_id(); ?>" style='display:none'>
     
+    <!-- Text above form div -->
+    <div class="ual_text_above"><?php echo get_option('ual_text_above_form'); ?></div>
     <!-- Login form -->
     <form id='ual_form_<?php $ual->form_id(); ?>' class='ual_form' method='post'>
     <div class='ual_form_item'>

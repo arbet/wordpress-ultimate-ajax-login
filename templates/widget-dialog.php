@@ -51,16 +51,19 @@ $ual = new UAL_Template();
 	    jQuery("#ual_div_<?php $ual->form_id(); ?>").dialog('open');
 	});
 	
+	// Change login buttons to jquery UI dialog buttons
+	jQuery(".ual_button").button();
     });
     
 </script>
 
 <!-- Login button code -->
-<button id="ual_link_<?php $ual->form_id(); ?>"><?php echo get_option('ual_login_button_text'); ?></button>
+<button id="ual_link_<?php $ual->form_id(); ?>" class="ual_dialog_button"><?php echo get_option('ual_login_button_text'); ?></button>
 
 <!-- Forms Dialog Div -->
 <div id="ual_div_<?php $ual->form_id(); ?>" title="<?php _e('Login Area'); ?>">
-    
+    <!-- Text above form div -->
+    <div class="ual_text_above"><?php echo get_option('ual_text_above_form'); ?></div>
     <!-- Login form -->
     <form id='ual_form_<?php $ual->form_id(); ?>' class='ual_form' method='post'>
     <div class='ual_form_item'>

@@ -73,7 +73,22 @@ class UAL_Widget extends WP_Widget {
 	
 	// User not signed in properly
 	if (is_wp_error($user)){
-	    $response['error'] = $user->get_error_message();
+	    
+	    // Check if the user has specified a custom error message, and return it
+	    if(get_option('ual_login_error_msg') != ''){
+		$response['error'] = get_option('ual_login_error_msg');
+		
+		// Specify that this is a custom error
+		$response['custom_error'] = true;
+	    }
+	    
+	    // No custom error message has been specified, use WordPress default
+	    else {
+		$response['error'] = $user->get_error_message();
+		
+		// This is not a custom error
+		$response['custom_error'] = false;		
+	    }
 	    $response['logged_in'] = false;
 	}
 	

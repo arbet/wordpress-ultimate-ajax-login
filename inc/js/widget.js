@@ -72,6 +72,10 @@ jQuery(document).ready(function($) {
                   // Show forgot password form on click
                     jQuery("#ual_error_" + form_id + " a").on("click", function( event) {
                         
+                        // Do nothing for custom errors (If set for custom errors, any link that is clicked will display the forgot password form)
+                        if(result.custom_error === true)
+                            return true;
+                        
                         event.preventDefault();
                         
                         $("#ual_forgot_form_" + form_id).show('slow'); 

@@ -30,12 +30,30 @@ do_settings_sections( 'ual-site-options' );
 <table class="form-table">	
         <tr valign="top">
         <th scope="row">Login Button Text</th>
-        <td><input type='text' name='ual_login_button_text' class='widefat' value='<?php echo get_option('ual_login_button_text')?>' />
+        <td><input type='text' name='ual_login_button_text' value='<?php echo get_option('ual_login_button_text')?>' />
 	    <p class="description">
 		By default, the text <em><strong>Login</strong></em> is displayed on all the login buttons. You can override it here, by changing it to something else, such as <em><strong>Click Here to Login</strong></em>, <em><strong>Login Now</strong></em>...
 	    </p>	    	    
 	</td>
         </tr>	
+
+        <tr valign="top">
+        <th scope="row">Text to show above form</th>
+        <td><textarea name='ual_text_above_form' rows="5" cols="30"><?php echo get_option('ual_text_above_form')?></textarea>
+	    <p class="description">
+		If you need to display a message for the user above the form, here is where you do it. HTML is allowed
+	    </p>	    	    
+	</td>
+        </tr>	
+	
+        <tr valign="top">
+        <th scope="row">Custom Error Login Message</th>
+        <td><textarea name='ual_login_error_msg' rows="5" cols="30"><?php echo get_option('ual_login_error_msg')?></textarea>
+	    <p class="description">
+		In case of an invalid login, you can show your own text. HTML is allowed, so you can link to custom recovery pages, support pages... Leave blank to use default WordPress messages.
+	    </p>	    	    
+	</td>
+        </tr>		
 	
         <tr valign="top">
         <th scope="row">Successful Login URL</th>
