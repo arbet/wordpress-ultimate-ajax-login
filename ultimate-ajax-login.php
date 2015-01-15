@@ -3,7 +3,7 @@
  * Plugin Name: Ultimate AJAX Login
  * Plugin URI: http://thoughtengineer.com/
  * Description:  Easy, Flexible and Customizable AJAX login plugin
- * Version: 1.1
+ * Version: 1.2
  * Author: Samer Bechara
  * Author URI: http://thoughtengineer.com/
  * Text Domain: ultimate-ajax-login

@@ -2,8 +2,8 @@
 Contributors: arbet01
 Tags: admin, AJAX, AJAX login, login, multi-site, redirect, registration, sidebar, jquery, popup, dialog, login dialog, login popup, mobile
 Requires at least: 3.1
-Tested up to: 4.0
-Stable tag: 1.1
+Tested up to: 4.1
+Stable tag: 1.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -20,8 +20,7 @@ How is this plugin different:
 *   Fully customizable: Just copy the template you're using from /templates/ directory in the plugin to the "ultimate_ajax_login" directory in your theme, and modify as you need to.
 *   After a user is logged in, nothing shows up. I found this pretty frustrating with other plugins, there was no way to hide things.
 *   If you need to show anything after a user logs in, just copy the template widget-logged-in.php to your ultimate_ajax_login folder and add whatever you need. You can call any WP function from there.
-*   Has two templates, one an AJAX-based classic login form, and the other is a jQuery UI dialog box (Tested and works on mobile)
-higher versions... this is just the highest one you've verified.
+*   Has three templates, one an AJAX-based classic login form, and the other is a jQuery UI dialog box (Tested and works on mobile), and the third one is a popmodal dialog box
 * Blocks the login form whenever a user is being logged in.
 *   Allows you to specify a global login redirect URL in your settings page, which applies to all of your widgets.
 * Login redirect URL can be overridden on a per-widget basis from the widget options page.
@@ -38,7 +37,7 @@ Instead of using the widget, you can insert the shortcode inside any post. If yo
 == Installation ==
 
 1. Install the plugin as usual
-1. Go to Settings -> Ultimate AJAX Login if you need to specify a login redirect URL
+1. Go to Settings -> Ultimate AJAX Login and customize like you wish
 1. Go to Appearance -> Widgets, add your widget and select the template you want to use
 
 == Frequently Asked Questions ==
