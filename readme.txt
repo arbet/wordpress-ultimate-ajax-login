@@ -59,6 +59,9 @@ Just copy the template widget-dialog.php to ultimate_ajax_login/widget-dialog.ph
 
 == Changelog ==
 
+= 1.2 = 
+* Added settings to allow further customizations of plugin (Custom error message, Custom text in login form...)
+
 = 1.1 = 
 * Added a new modal layout
 
